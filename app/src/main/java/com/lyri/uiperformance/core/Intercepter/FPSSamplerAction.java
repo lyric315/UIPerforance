@@ -21,8 +21,9 @@ public class FPSSamplerAction extends BaseSamplerAction implements Choreographer
     private int mFPS;//最新的帧率
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    private static final int FPS_LIMIT = 30;//最低帧率，低于这个帧代表页面不流畅
     private static final int INTERVAL = 300;//Frame采样时间
-    private static final String FPS = "fps";
+    private static final String FPS = "FPS";
 
     public FPSSamplerAction(IMonitorRecord addMonitorRecord) {
         super(addMonitorRecord);
@@ -37,7 +38,11 @@ public class FPSSamplerAction extends BaseSamplerAction implements Choreographer
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    mMonitorRecord.addOneRecord(FPS, mFPS + "");
+                    if (mFPS < FPS_LIMIT) {
+                        mMonitorRecord.addOneRecord(FPS,  String.valueOf(mFPS), false);
+                    } else {
+                        mMonitorRecord.addOneRecord(FPS, String.valueOf(mFPS), true);
+                    }
                 }
             });
         }

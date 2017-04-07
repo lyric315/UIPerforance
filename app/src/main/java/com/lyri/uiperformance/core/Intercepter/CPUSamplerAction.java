@@ -19,6 +19,8 @@ public class CPUSamplerAction extends BaseSamplerAction {
     private RandomAccessFile procStatFile;
     private RandomAccessFile appStatFile;
     private IMonitorRecord mMonitorRecord;
+
+    private static final int RATE_LIMIT = 50;//CPU占比阈值
     private static final String TAG = "CPUSampler";
     private static final String CPU_RATE = "cpu_rate";
 
@@ -77,7 +79,8 @@ public class CPUSamplerAction extends BaseSamplerAction {
 
             //将CPU使用率添加悬浮窗中
             if (mMonitorRecord != null) {
-                mMonitorRecord.addOneRecord(CPU_RATE, (int) (cpuRate * 100) + "%");
+                int cpuRateInt = (int) (cpuRate * 100);
+                mMonitorRecord.addOneRecord(CPU_RATE, cpuRateInt + "%", cpuRateInt < RATE_LIMIT ? true : false);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

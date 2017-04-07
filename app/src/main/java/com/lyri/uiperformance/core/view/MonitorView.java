@@ -42,7 +42,7 @@ public class MonitorView extends Thread implements IMonitorView, IMonitorRecord 
     }
 
     @Override
-    public void addOneRecord(final String tvName, final String tvNum) {
+    public void addOneRecord(final String tvName, final String tvNum, final boolean isGoodValue) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -61,6 +61,13 @@ public class MonitorView extends Thread implements IMonitorView, IMonitorRecord 
                     mMonitorView.addView(tv);
                     mMapView.put(tvName, tv);
                 }
+
+                if (isGoodValue) {
+                    tv.setTextColor(mContext.getResources().getColor(R.color.monitor_nomal_color));
+                } else {
+                    tv.setTextColor(mContext.getResources().getColor(R.color.monitor_error_color));
+                }
+
                 tv.setText(tvResult);
             }
         });

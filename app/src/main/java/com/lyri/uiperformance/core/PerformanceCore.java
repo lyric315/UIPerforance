@@ -85,6 +85,10 @@ public class PerformanceCore implements Application.ActivityLifecycleCallbacks {
 
     @Override
     public void onActivityStopped(Activity activity) {
+        if (mIsForeground == false) {
+            return;
+        }
+
         if (!isForegroundApp()) {
             mIsForeground = false;
             stop();

@@ -35,8 +35,8 @@ public class MemSamplerAction extends BaseSamplerAction {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                mMonitorRecord.addOneRecord(USED_MEM, getUseSize()+"KB");
-                mMonitorRecord.addOneRecord(MAX_MEM, getTotalMemory()+"M");
+                mMonitorRecord.addOneRecord(USED_MEM, getUseSize() + "KB", true);
+                mMonitorRecord.addOneRecord(MAX_MEM, getTotalMemory() + "M", true);
             }
         });
     }
@@ -47,7 +47,7 @@ public class MemSamplerAction extends BaseSamplerAction {
      * @return
      */
     private long getTotalMemory() {
-        return Runtime.getRuntime().maxMemory() >>20;
+        return Runtime.getRuntime().maxMemory() >> 20;
     }
 
     /**

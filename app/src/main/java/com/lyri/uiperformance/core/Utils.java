@@ -14,6 +14,4 @@ public class Utils {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return metrics.density * dp;
     }
-
-
 }

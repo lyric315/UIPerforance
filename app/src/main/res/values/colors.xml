@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="fps_normal_color">#c89ACD32</color>
-    <color name="fps_bad_color">#c8FF0000</color>
+    <color name="monitor_bg">#a02d94c1</color>
+    <color name="monitor_nomal_color">#ffffff</color>
+    <color name="monitor_error_color">#d0FF0000</color>
+
 </resources>
